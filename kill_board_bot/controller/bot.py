@@ -1,11 +1,11 @@
 import discord
 import view.utils
 import controller.network_requests
-import models.player_manager
+import controller.guild_services
 from discord.ext import tasks, commands
 
 guild_list =[]
-player_manager = models.player_manager.PlayerManager()
+guild_manager_list = []
 
 
 
@@ -30,12 +30,7 @@ def run_discord_bot():
         if guild_name not in guild_list:
             guild_list.append(guild_name)
             try:
-                guild_id= await controller.network_requests.inti_guild_id(guild_name)
-                player_id_list = await controller.network_requests.get_player_id([guild_id])
-                recent_kills_list = await controller.network_requests.get_recent_kills(player_id_list, player_manager)
-                recent_deaths_list = await controller.network_requests.get_recent_deaths(player_id_list, player_manager)
-                print('Number of players in the guild:')
-                print(player_manager.count())
+                await controller.guild_services.inti_guild_id(guild_name, guild_manager_list)
                 await ctx.send(f"Guild '{guild_name}' added successfully!")
             except ValueError:
                 await ctx.send(f'There is no Guild by this name')
@@ -50,17 +45,18 @@ def run_discord_bot():
     async def recentkills(ctx):
         #print (f'message from user: {ctx.message}')
         channel = ctx.channel
-            #make list of guild uids
-        guild_id_list = await controller.network_requests.get_guild_id(guild_list)
-            #make list of player uids
-        player_id_list = await controller.network_requests.get_player_id(guild_id_list)
-            #make a list of recent kill events
-        recent_kills_list = await controller.network_requests.get_recent_kills(player_id_list, player_manager)
-            #make a list of recent death events
-        recent_deaths_list = await controller.network_requests.get_recent_deaths(player_id_list, player_manager)
+        
+        event_list = await controller.guild_services.get_recent_events(guild_manager_list)
         
         
-        await view.utils.render_kills(recent_kills_list,channel)
+        await view.utils.render_events(event_list,channel)
+
+    @bot.command()
+    async def renderkill(ctx):
+        channel = ctx.channel
+        eventlist = [872517931]
+        await view.utils.render_events(eventlist,channel)
+        
 
     @bot.command()
     async def ping(ctx):

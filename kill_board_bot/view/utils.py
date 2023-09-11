@@ -6,7 +6,7 @@ import controller.network_requests
 from PIL import Image
 
 
-async def render_kills(event_list, channel):
+async def render_events(event_list, channel):
     # to this pass a list of event Id's
     for event_id in event_list:  # Simplified iteration
         endpoint = f'https://gameinfo.albiononline.com/api/gameinfo/events/{event_id}'
@@ -14,9 +14,10 @@ async def render_kills(event_list, channel):
         
         
         # open the backround image
-        # backround = Image.open('/backround/gear_base.png')
+        backround = Image.open('gear_base.png')
         for key, value in event_data['Killer']['Equipment'].items():
             if value:
                 print(value)
-                await channel.send(f"{key}: Type - {value['Type']}, Count - {value['Count']}, Quality - {value['Quality']}")
+                image = await controller.network_requests.get_item_image(f"{value['Type']}?Count={value['Count']}Quality={value['Quality']}")
+                await channel.send(file=discord.File(image, "image.png"))
 

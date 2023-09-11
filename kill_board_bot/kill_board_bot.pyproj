@@ -24,6 +24,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="controller\bot.py" />
+    <Compile Include="controller\data_processing.py" />
+    <Compile Include="controller\guild_services.py" />
     <Compile Include="controller\network_requests.py" />
     <Compile Include="main.py" />
     <Compile Include="models\player_manager.py" />
