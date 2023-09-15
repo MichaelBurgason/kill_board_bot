@@ -36,7 +36,7 @@ async def search_guild(guild_name):
         return guild_search
 
 async def get_item_image(item_id):
-      item_render_endpoint =f'https://render.albiononline.com/v1/item/{item_id}'
+      item_render_endpoint =f'https://render.albiononline.com/v1/item/{item_id}&size=120'
       image = await async_request(item_render_endpoint)
       return image
 

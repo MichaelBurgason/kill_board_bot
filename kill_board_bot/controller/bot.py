@@ -1,5 +1,5 @@
 import discord
-import view.utils
+import view.image_processing
 import controller.network_requests
 import controller.guild_services
 from discord.ext import tasks, commands
@@ -49,13 +49,13 @@ def run_discord_bot():
         event_list = await controller.guild_services.get_recent_events(guild_manager_list)
         
         
-        await view.utils.render_events(event_list,channel)
+        await view.image_processing.render_events(event_list,channel)
 
     @bot.command()
     async def renderkill(ctx):
         channel = ctx.channel
         eventlist = [872517931]
-        await view.utils.render_events(eventlist,channel)
+        await view.image_processing.render_events(eventlist,channel)
         
 
     @bot.command()

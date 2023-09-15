@@ -29,7 +29,7 @@
     <Compile Include="controller\network_requests.py" />
     <Compile Include="main.py" />
     <Compile Include="models\player_manager.py" />
-    <Compile Include="view\utils.py" />
+    <Compile Include="view\image_processing.py" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|PythonCore|3.10" />
