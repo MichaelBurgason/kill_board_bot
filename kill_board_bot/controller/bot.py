@@ -46,8 +46,8 @@ def run_discord_bot():
         #print (f'message from user: {ctx.message}')
         channel = ctx.channel
         
-        event_list = await controller.guild_services.get_recent_events(guild_manager_list)
-        
+        #event_list = await controller.guild_services.get_recent_events(guild_manager_list)
+        event_list = [876724192]
         
         await view.image_processing.render_events(event_list,channel)
 
