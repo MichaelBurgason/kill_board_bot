@@ -10,7 +10,8 @@ guild_manager_list = []
 
 
 def run_discord_bot():
-    TOKEN = 'MTE0OTg2NDYyNTk0OTY1NTA0MA.GVvLkq.B8xT89PGx0Th-mhpVC6FBXFIuLNAK7Rg6gAOko'
+    #ADD TOKEN PATH HERE
+    #TOKEN =
     intents = discord.Intents.default()
     intents.message_content = True
     bot = commands.Bot(command_prefix='!', intents=intents)
